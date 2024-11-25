@@ -13,7 +13,8 @@ public class Main {
             System.out.println("2 - Cadastrar Disco");
             System.out.println("3 - Listar Artistas");
             System.out.println("4 - Listar Discos");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Editar disco e artista");
+            System.out.println("6 - Sair");
             System.out.println("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -27,6 +28,8 @@ public class Main {
             } else if(opcao == 4){
                 listarDiscos();
             } else if(opcao == 5){
+                editarArtistaEDisco();
+            }else{
                 break;
             }
         }
@@ -73,6 +76,7 @@ public class Main {
             String nomeFaixa = scanner.nextLine();
             System.out.println("Digite a duração da faixa: ");
             int duracaoFaixa = scanner.nextInt();
+            
             scanner.nextLine();
             FaixaDisco faixa = new FaixaDisco(nomeFaixa, duracaoFaixa);
             disco.adicionarFaixas(faixa);
@@ -86,6 +90,56 @@ public class Main {
 
         discos.add(disco);
     }
+
+    private static void editarArtistaEDisco(){
+        System.out.println("Digite o nome do artista que deseja editar: ");
+        String nomeArtista = scanner.nextLine();
+        Artista artista = null;
+        for(Artista art : artistas){
+            if(art.getNomeArtista().equals(nomeArtista)){
+                artista = art;
+                break;
+            }
+        }
+
+        if(artista == null){
+            System.out.println("Artista não encontrado");
+            return;
+        }
+
+        System.out.println("Digite o novo nome do artista: ");
+        String novoNomeArtista = scanner.nextLine();
+        artista.setNomeArtista(novoNomeArtista);
+
+        System.out.println("Digite o novo estilo musical do artista: ");
+        String novoEstiloMusical = scanner.nextLine();
+        artista.setEstiloMusical(novoEstiloMusical);
+
+        System.out.println("Digite o nome do disco que deseja editar: ");
+        String nomeDisco = scanner.nextLine();
+        Disco disco = null;
+        for(Disco disc : discos){
+            if(disc.getTituloDisco().equals(nomeDisco)){
+                disco = disc;
+                break;
+            }
+        }
+
+        if(disco == null){
+            System.out.println("Disco não encontrado");
+            return;
+        }
+
+        System.out.println("Digite o novo nome do disco: ");
+        String novoNomeDisco = scanner.nextLine();
+        disco.setTituloDisco(novoNomeDisco);
+
+        System.out.println("Digite o novo ano de lançamento do disco: ");
+        int novoAnoLancamentoDisco = scanner.nextInt();
+        disco.setAnoLancamentoDisco(novoAnoLancamentoDisco);
+
+    }
+
 
     private static void listarArtistas(){
         for(Artista artista : artistas){
